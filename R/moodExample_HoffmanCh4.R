@@ -40,7 +40,8 @@ ggplot(mood, aes(studyday, posmood, group = personid)) + geom_line() +
 nmod1 <- lme(fixed = posmood ~ studyday, random = ~ 1 | personid, data = mood,
              weights = varIdent(form=~1 | studyday))
 
-unstruct <- gls(posmood ~ studyday, mood, correlation=corSymm(form = ~ 1 |personid),  
+unstruct <- gls(posmood ~ studyday, mood, 
+                correlation=corSymm(form = ~ 1 |personid),  
                 weights=varIdent(form = ~ 1|studyday),method="REML")
 corandcov(unstruct)
 
