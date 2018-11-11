@@ -23,3 +23,9 @@ by Garrett M. Fitxmaurice, Nan M. Laird, and James H. Ware
 by Niall Bolger and Jean-Philippe Laurenceau
 
 **Website**: http://www.intensivelongitudinal.com/
+
+
+### Growth Curve Modeling: Structural Equation and Multilevel Modeling Approaches
+by Kevin Grimm Nilam Ram and Ryne Estabrook
+
+**Website**: https://www.guilford.com/companion-site/Growth-Modeling/9781462526062
