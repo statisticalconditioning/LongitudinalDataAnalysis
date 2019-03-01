@@ -32,10 +32,10 @@ sentenceID %>%
  
 
 
-amod0 <- aov(rt ~ subjectid + itemid, data = sentence)
+amod0 <- aov(log(rt) ~ subjectid + itemid, data = sentence)
 summary(amod0)
 
-mod0 <- lmer(rt ~ 1 + (1 | subjectid) + (1 | itemid), sentence)
+mod0 <- lmer(log(rt) ~ 1 + (1 | subjectid) + (1 | itemid), sentence)
 
 summary(mod0)
 screenreg(mod0)
