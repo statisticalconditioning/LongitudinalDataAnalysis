@@ -16,16 +16,14 @@ library(lme4)
 library(texreg)
 library(effects)
 library(emmeans)
-
+library(sjstats)
 
 dat <- read_dta("data/dta/STATA_Chapter3a.dta")
-
 
 datlong <- dat %>% 
   gather(time, outcome, outcome1, outcome2) %>% 
   mutate(group = factor(group, labels = c("control", "treatment")),
          time = factor(time, labels = c("time1", "time2")))
-
 
 datlong %>% 
   summarise(mean = mean(outcome),
@@ -44,7 +42,6 @@ screenreg(list(mod0bp, mod0wp))
 
 plot(predict(mod0bp))
 plot(predict(mod0wp))
-
 
 mod1bp <- lm(outcome ~ time*group, datlong)
 mod1wp <- lmer(outcome ~ time*group + (1 |personid), datlong)
