@@ -1,0 +1,11 @@
+TITLE: Cognition Example
+       From Hoffman, Chapter 2.
+DATA: FILE = "mplus/Cognition/cognition.dat";
+VARIABLE: 
+NAMES = personid cog age grip sexmw demgroup; 
+MISSING=.;
+usevariables = cog;
+
+analysis: 
+ estimator = ml;
+ 
