@@ -1,0 +1,47 @@
+---
+title: "Longitudinal Data Preparation"
+author: "William Murrah"
+date: "4/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+
+```{r}
+wght_long <- read.table("../../Dropbox/Data/Grimm_Data/wght_data.dat",
+                        na.strings = ".")
+names(wght_long) = c('id','occ','occ_begin','year','time_in_study','grade','age','gyn_age', 'wght')
+wght_long$age_r <- round(wght_long$age)
+```
+
+
+
+```{r}
+ggplot(wght_long[wght_long$id >1300 & wght_long$id < 1600, ], aes(x = age, y = wght, group = id)) + geom_point(size = .8) + geom_line(alpha = .6)
+```
+
+
+```{r}
+
+```
+
+
+## Long to Wide
+
+```{r}
+wght_wide <- reshape(wght_long, v.names = "wght", idvar = "id", 
+                     timevar = "age_r", direction = "wide")
+names(wght_wide) <- gsub("\\.", "", x = names(wght_wide))
+names(wght_wide)
+
+wght_wide1 <- wght_wide %>% 
+  select(id, wght5, wght6, wght7, wght8, wght9, wght10, wght11, wght12,
+         wght13, wght14, wght15, wght16, wght17, wght18, wght19)
+```
+
+
+
