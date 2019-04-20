@@ -1,0 +1,306 @@
+Mplus VERSION 8.2 (Linux)
+MUTHEN & MUTHEN
+04/18/2019   7:46 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:     No Growth Model - PIAT Mathematics Data;
+
+  DATA:      FILE= 'nlsy_math_wide_R.dat';
+
+  VARIABLE:  NAMES =
+      id female lb_wght anti_k1
+      math2-math8
+      age2-age8
+      men2-men8
+      spring2-spring8
+      anti2-anti8;
+
+  MISSING = .;
+  USEVAR = math2-math8;
+
+  ANALYSIS:   TYPE= MEANSTRUCTURE;
+              COVERAGE=0;
+
+  MODEL:     eta_1 BY math2-math8@1;
+             eta_1;
+             [eta_1];
+             math2-math8 (theta);
+             [math2-math8@0];
+
+  OUTPUT: SAMPSTAT;
+
+
+
+*** WARNING in ANALYSIS command
+  Starting with Version 5, TYPE=MEANSTRUCTURE is the default for all
+  analyses.  To remove means from the model, use
+  MODEL=NOMEANSTRUCTURE in the ANALYSIS command.
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  1
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+No Growth Model - PIAT Mathematics Data;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         932
+
+Number of dependent variables                                    7
+Number of independent variables                                  0
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   MATH2       MATH3       MATH4       MATH5       MATH6       MATH7
+   MATH8
+
+Continuous latent variables
+   ETA_1
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  nlsy_math_wide_R.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            60
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.000
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              MATH2         MATH3         MATH4         MATH5         MATH6
+              ________      ________      ________      ________      ________
+ MATH2          0.359
+ MATH3          0.036         0.462
+ MATH4          0.172         0.054         0.406
+ MATH5          0.099         0.242         0.059         0.399
+ MATH6          0.137         0.151         0.175         0.038         0.418
+ MATH7          0.047         0.100         0.067         0.119         0.032
+ MATH8          0.064         0.060         0.072         0.036         0.087
+
+
+           Covariance Coverage
+              MATH7         MATH8
+              ________      ________
+ MATH7          0.186
+ MATH8          0.008         0.152
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              MATH2         MATH3         MATH4         MATH5         MATH6
+              ________      ________      ________      ________      ________
+               32.604        40.017        45.794        49.510        52.653
+
+
+           Means
+              MATH7         MATH8
+              ________      ________
+               55.535        57.330
+
+
+           Covariances
+              MATH2         MATH3         MATH4         MATH5         MATH6
+              ________      ________      ________      ________      ________
+ MATH2        100.411
+ MATH3         55.028       108.483
+ MATH4         65.738        54.181        99.083
+ MATH5         53.430        65.174        61.266        90.238
+ MATH6         62.273        66.189        76.006        56.520       102.717
+ MATH7         64.235        77.789        68.704        74.573        87.476
+ MATH8         78.237        69.245        96.749        77.061        96.474
+
+
+           Covariances
+              MATH7         MATH8
+              ________      ________
+ MATH7        115.902
+ MATH8        108.322       140.567
+
+
+           Correlations
+              MATH2         MATH3         MATH4         MATH5         MATH6
+              ________      ________      ________      ________      ________
+ MATH2          1.000
+ MATH3          0.527         1.000
+ MATH4          0.659         0.523         1.000
+ MATH5          0.561         0.659         0.648         1.000
+ MATH6          0.613         0.627         0.753         0.587         1.000
+ MATH7          0.595         0.694         0.641         0.729         0.802
+ MATH8          0.659         0.561         0.820         0.684         0.803
+
+
+           Correlations
+              MATH7         MATH8
+              ________      ________
+ MATH7          1.000
+ MATH8          0.849         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -7866.567
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     MATH2                32.609       0.270      12.000    0.30%      24.000     29.000     32.000
+             335.000     105.486      -0.445      60.000    0.30%      35.000     41.000
+     MATH3                39.884      -0.052      13.000    0.23%      30.000     38.000     41.000
+             431.000     105.833      -0.313      67.000    0.23%      43.000     48.000
+     MATH4                46.169      -0.060      18.000    0.26%      38.000     44.000     46.000
+             378.000     103.056      -0.060      70.000    0.26%      48.000     54.000
+     MATH5                49.774       0.043      23.000    0.27%      43.000     46.000     48.000
+             372.000      89.476      -0.324      71.000    0.27%      51.000     59.000
+     MATH6                52.723       0.252      24.000    0.26%      45.000     48.000     50.500
+             390.000      98.067      -0.367      78.000    0.51%      53.000     63.000
+     MATH7                55.353       0.217      31.000    0.58%      46.000     50.000     53.000
+             173.000     112.286      -0.947      81.000    0.58%      60.000     66.000
+     MATH8                57.831       0.161      26.000    0.70%      47.000     53.000     56.000
+             142.000     132.028      -0.487      81.000    1.41%      61.000     68.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        3
+
+Loglikelihood
+
+          H0 Value                       -8745.952
+          H1 Value                       -7866.567
+
+Information Criteria
+
+          Akaike (AIC)                   17497.903
+          Bayesian (BIC)                 17512.415
+          Sample-Size Adjusted BIC       17502.888
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                           1758.769
+          Degrees of Freedom                    32
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.241
+          90 Percent C.I.                    0.231  0.250
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.000
+          TLI                               -0.347
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            862.101
+          Degrees of Freedom                    21
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.674
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ ETA_1    BY
+    MATH2              1.000      0.000    999.000    999.000
+    MATH3              1.000      0.000    999.000    999.000
+    MATH4              1.000      0.000    999.000    999.000
+    MATH5              1.000      0.000    999.000    999.000
+    MATH6              1.000      0.000    999.000    999.000
+    MATH7              1.000      0.000    999.000    999.000
+    MATH8              1.000      0.000    999.000    999.000
+
+ Means
+    ETA_1             45.915      0.324    141.721      0.000
+
+ Intercepts
+    MATH2              0.000      0.000    999.000    999.000
+    MATH3              0.000      0.000    999.000    999.000
+    MATH4              0.000      0.000    999.000    999.000
+    MATH5              0.000      0.000    999.000    999.000
+    MATH6              0.000      0.000    999.000    999.000
+    MATH7              0.000      0.000    999.000    999.000
+    MATH8              0.000      0.000    999.000    999.000
+
+ Variances
+    ETA_1             46.917      4.832      9.709      0.000
+
+ Residual Variances
+    MATH2            116.682      4.548     25.656      0.000
+    MATH3            116.682      4.548     25.656      0.000
+    MATH4            116.682      4.548     25.656      0.000
+    MATH5            116.682      4.548     25.656      0.000
+    MATH6            116.682      4.548     25.656      0.000
+    MATH7            116.682      4.548     25.656      0.000
+    MATH8            116.682      4.548     25.656      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.458E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+     Beginning Time:  19:46:02
+        Ending Time:  19:46:02
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2018 Muthen & Muthen

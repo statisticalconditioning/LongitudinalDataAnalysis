@@ -1,0 +1,416 @@
+Mplus VERSION 7.4
+MUTHEN & MUTHEN
+02/02/2016   2:44 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:     Linear Growth Model - PIAT Mathematics Data;
+
+  DATA:      FILE= 'c:\GRE2016\Data\nlsy_math_wide_R.dat';
+
+  VARIABLE:  NAMES =
+      id female lb_wght anti_k1
+      math2-math8
+      age2-age8
+      men2-men8
+      spring2-spring8
+      anti2-anti8;
+
+    MISSING = .;
+
+    USEVAR =
+      math2-math8;
+
+  ANALYSIS:   TYPE= MEANSTRUCTURE;
+              COVERAGE=0;
+
+  MODEL:
+      eta_1 BY math2-math8@1;
+      eta_1;
+      [eta_1];
+      eta_2 BY math2@0
+               math3@1
+               math4@2
+               math5@3
+               math6@4
+               math7@5
+               math8@6;
+      eta_2;
+      [eta_2];
+      eta_1 WITH eta_2;
+      math2-math8 (v_u);
+      [math2-math8@0];
+  OUTPUT: SAMPSTAT;
+
+  PLOT:
+      TYPE = PLOT3;
+      SERIES = math2-math8(eta_2);
+  SAVEDATA:
+      FILE = factor_scores.dat;
+      SAVE = FSCORES;
+
+
+
+*** WARNING in ANALYSIS command
+  Starting with Version 5, TYPE=MEANSTRUCTURE is the default for all
+  analyses.  To remove means from the model, use
+  MODEL=NOMEANSTRUCTURE in the ANALYSIS command.
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  1
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Linear Growth Model - PIAT Mathematics Data;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         932
+
+Number of dependent variables                                    7
+Number of independent variables                                  0
+Number of continuous latent variables                            2
+
+Observed dependent variables
+
+  Continuous
+   MATH2       MATH3       MATH4       MATH5       MATH6       MATH7
+   MATH8
+
+Continuous latent variables
+   ETA_1       ETA_2
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  c:\GRE2016\Data\nlsy_math_wide_R.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            60
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.000
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              MATH2         MATH3         MATH4         MATH5         MATH6
+              ________      ________      ________      ________      ________
+ MATH2          0.359
+ MATH3          0.036         0.462
+ MATH4          0.172         0.054         0.406
+ MATH5          0.099         0.242         0.059         0.399
+ MATH6          0.137         0.151         0.175         0.038         0.418
+ MATH7          0.047         0.100         0.067         0.119         0.032
+ MATH8          0.064         0.060         0.072         0.036         0.087
+
+
+           Covariance Coverage
+              MATH7         MATH8
+              ________      ________
+ MATH7          0.186
+ MATH8          0.008         0.152
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              MATH2         MATH3         MATH4         MATH5         MATH6
+              ________      ________      ________      ________      ________
+      1        32.604        40.017        45.794        49.510        52.653
+
+
+           Means
+              MATH7         MATH8
+              ________      ________
+      1        55.535        57.330
+
+
+           Covariances
+              MATH2         MATH3         MATH4         MATH5         MATH6
+              ________      ________      ________      ________      ________
+ MATH2        100.411
+ MATH3         55.028       108.483
+ MATH4         65.738        54.181        99.083
+ MATH5         53.430        65.174        61.266        90.238
+ MATH6         62.273        66.189        76.006        56.520       102.717
+ MATH7         64.235        77.789        68.704        74.573        87.476
+ MATH8         78.237        69.245        96.749        77.061        96.474
+
+
+           Covariances
+              MATH7         MATH8
+              ________      ________
+ MATH7        115.902
+ MATH8        108.322       140.567
+
+
+           Correlations
+              MATH2         MATH3         MATH4         MATH5         MATH6
+              ________      ________      ________      ________      ________
+ MATH2          1.000
+ MATH3          0.527         1.000
+ MATH4          0.659         0.523         1.000
+ MATH5          0.561         0.659         0.648         1.000
+ MATH6          0.613         0.627         0.753         0.587         1.000
+ MATH7          0.595         0.694         0.641         0.729         0.802
+ MATH8          0.659         0.561         0.820         0.684         0.803
+
+
+           Correlations
+              MATH7         MATH8
+              ________      ________
+ MATH7          1.000
+ MATH8          0.849         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -7866.567
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     MATH2                32.609       0.270      12.000    0.30%      24.000     29.000     32.000
+             335.000     105.486      -0.445      60.000    0.30%      35.000     41.000
+     MATH3                39.884      -0.052      13.000    0.23%      30.000     38.000     41.000
+             431.000     105.833      -0.313      67.000    0.23%      43.000     48.000
+     MATH4                46.169      -0.060      18.000    0.26%      38.000     44.000     46.000
+             378.000     103.056      -0.060      70.000    0.26%      48.000     54.000
+     MATH5                49.774       0.043      23.000    0.27%      43.000     46.000     48.000
+             372.000      89.476      -0.324      71.000    0.27%      51.000     59.000
+     MATH6                52.723       0.252      24.000    0.26%      45.000     48.000     50.500
+             390.000      98.067      -0.367      78.000    0.51%      53.000     63.000
+     MATH7                55.353       0.217      31.000    0.58%      46.000     50.000     53.000
+             173.000     112.286      -0.947      81.000    0.58%      60.000     66.000
+     MATH8                57.831       0.161      26.000    0.70%      47.000     53.000     56.000
+             142.000     132.028      -0.487      81.000    1.41%      61.000     68.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        6
+
+Loglikelihood
+
+          H0 Value                       -7968.693
+          H1 Value                       -7866.567
+
+Information Criteria
+
+          Akaike (AIC)                   15949.386
+          Bayesian (BIC)                 15978.410
+          Sample-Size Adjusted BIC       15959.354
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                            204.252
+          Degrees of Freedom                    29
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.081
+          90 Percent C.I.                    0.070  0.091
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.792
+          TLI                                0.849
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            862.101
+          Degrees of Freedom                    21
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.178
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ ETA_1    BY
+    MATH2              1.000      0.000    999.000    999.000
+    MATH3              1.000      0.000    999.000    999.000
+    MATH4              1.000      0.000    999.000    999.000
+    MATH5              1.000      0.000    999.000    999.000
+    MATH6              1.000      0.000    999.000    999.000
+    MATH7              1.000      0.000    999.000    999.000
+    MATH8              1.000      0.000    999.000    999.000
+
+ ETA_2    BY
+    MATH2              0.000      0.000    999.000    999.000
+    MATH3              1.000      0.000    999.000    999.000
+    MATH4              2.000      0.000    999.000    999.000
+    MATH5              3.000      0.000    999.000    999.000
+    MATH6              4.000      0.000    999.000    999.000
+    MATH7              5.000      0.000    999.000    999.000
+    MATH8              6.000      0.000    999.000    999.000
+
+ ETA_1    WITH
+    ETA_2             -0.181      1.150     -0.158      0.875
+
+ Means
+    ETA_1             35.268      0.355     99.230      0.000
+    ETA_2              4.339      0.088     49.136      0.000
+
+ Intercepts
+    MATH2              0.000      0.000    999.000    999.000
+    MATH3              0.000      0.000    999.000    999.000
+    MATH4              0.000      0.000    999.000    999.000
+    MATH5              0.000      0.000    999.000    999.000
+    MATH6              0.000      0.000    999.000    999.000
+    MATH7              0.000      0.000    999.000    999.000
+    MATH8              0.000      0.000    999.000    999.000
+
+ Variances
+    ETA_1             64.562      5.659     11.408      0.000
+    ETA_2              0.733      0.327      2.238      0.025
+
+ Residual Variances
+    MATH2             36.229      1.867     19.410      0.000
+    MATH3             36.229      1.867     19.410      0.000
+    MATH4             36.229      1.867     19.410      0.000
+    MATH5             36.229      1.867     19.410      0.000
+    MATH6             36.229      1.867     19.410      0.000
+    MATH7             36.229      1.867     19.410      0.000
+    MATH8             36.229      1.867     19.410      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.191E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+SAMPLE STATISTICS FOR ESTIMATED FACTOR SCORES
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              ETA_1         ETA_1_SE      ETA_2         ETA_2_SE
+              ________      ________      ________      ________
+ 1             35.267         3.942         4.339         0.795
+
+
+           Covariances
+              ETA_1         ETA_1_SE      ETA_2         ETA_2_SE
+              ________      ________      ________      ________
+ ETA_1         48.905
+ ETA_1_SE      -0.050         0.118
+ ETA_2          1.050        -0.005         0.099
+ ETA_2_SE       0.009         0.006         0.002         0.002
+
+
+           Correlations
+              ETA_1         ETA_1_SE      ETA_2         ETA_2_SE
+              ________      ________      ________      ________
+ ETA_1          1.000
+ ETA_1_SE      -0.021         1.000
+ ETA_2          0.478        -0.045         1.000
+ ETA_2_SE       0.032         0.437         0.166         1.000
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Histograms (sample values, estimated factor scores, estimated values, residuals)
+  Scatterplots (sample values, estimated factor scores, estimated values, residuals)
+  Sample means
+  Estimated means
+  Sample and estimated means
+  Latent variable distribution plots
+  Observed individual values
+  Estimated individual values
+
+SAVEDATA INFORMATION
+
+
+  Save file
+    factor_scores.dat
+
+  Order and format of variables
+
+    MATH2          F10.3
+    MATH3          F10.3
+    MATH4          F10.3
+    MATH5          F10.3
+    MATH6          F10.3
+    MATH7          F10.3
+    MATH8          F10.3
+    ETA_1          F10.3
+    ETA_1_SE       F10.3
+    ETA_2          F10.3
+    ETA_2_SE       F10.3
+
+  Save file format
+    11F10.3
+
+  Save file record length    10000
+
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    c:\gre2016\chapter 3\mplus\2.mplus_chapter3_linear_grimm_ram_estabrook.dgm
+
+     Beginning Time:  14:44:44
+        Ending Time:  14:44:44
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2015 Muthen & Muthen

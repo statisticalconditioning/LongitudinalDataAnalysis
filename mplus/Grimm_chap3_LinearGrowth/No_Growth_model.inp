@@ -1,0 +1,25 @@
+TITLE:     No Growth Model - PIAT Mathematics Data;
+
+DATA:      FILE= 'nlsy_math_wide_R.dat';
+
+VARIABLE:  NAMES = 
+    id female lb_wght anti_k1
+    math2-math8
+    age2-age8
+    men2-men8
+    spring2-spring8
+    anti2-anti8;
+
+MISSING = .; 
+USEVAR = math2-math8;
+
+ANALYSIS:   TYPE= MEANSTRUCTURE;             
+            COVERAGE=0;
+
+MODEL:     eta_1 BY math2-math8@1;     
+           eta_1;     
+           [eta_1];
+           math2-math8 (theta);     
+           [math2-math8@0];
+
+OUTPUT: SAMPSTAT; 

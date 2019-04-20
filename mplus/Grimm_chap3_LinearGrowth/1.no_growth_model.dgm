@@ -1,0 +1,69 @@
+VERSION 1.1.0
+INPUT
+TITLE:
+     No Growth Model - PIAT Mathematics Data;
+
+DATA:
+      FILE= 'c:\GRE2016\Data\nlsy_math_wide_R.dat';
+VARIABLE:
+  NAMES =
+    id female lb_wght anti_k1
+    math2-math8
+    age2-age8
+    men2-men8
+    spring2-spring8
+    anti2-anti8;
+MISSING = .;
+USEVAR = math2-math8;
+ANALYSIS:
+   TYPE= MEANSTRUCTURE;
+            COVERAGE=0;
+OUTPUT:
+ SAMPSTAT;
+MODEL:
+     eta_1 BY math2-math8@1;
+           eta_1;
+           [eta_1];
+           math2-math8 (theta);
+           [math2-math8@0];
+INPUT_END
+2
+0
+0
+0
+ML
+1
+GENERAL
+0
+7
+1
+0
+math2 math3 math4 math5 math6 math7 math8 eta_1
+1
+-1 -1 -1 -1 -1 -1 -1 0
+0
+1
+eta_1
+math2 math3 math4 math5 math6 math7 math8
+1 1 eta_1 math2    1.000    0.000
+1 1 eta_1 math3    1.000    0.000
+1 1 eta_1 math4    1.000    0.000
+1 1 eta_1 math5    1.000    0.000
+1 1 eta_1 math6    1.000    0.000
+1 1 eta_1 math7    1.000    0.000
+1 1 eta_1 math8    1.000    0.000
+4 1 math2  116.682    4.548
+94 1 math2 theta
+4 1 math3  116.682    4.548
+94 1 math3 theta
+4 1 math4  116.682    4.548
+94 1 math4 theta
+4 1 math5  116.682    4.548
+94 1 math5 theta
+4 1 math6  116.682    4.548
+94 1 math6 theta
+4 1 math7  116.682    4.548
+94 1 math7 theta
+4 1 math8  116.682    4.548
+94 1 math8 theta
+5 1 eta_1   46.917    4.832
