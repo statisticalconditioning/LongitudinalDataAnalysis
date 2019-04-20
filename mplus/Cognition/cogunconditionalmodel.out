@@ -1,0 +1,177 @@
+Mplus VERSION 8.2
+MUTHEN & MUTHEN
+04/04/2019   9:09 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Cognition Example
+         From Hoffman, Chapter 2.
+  DATA: FILE = "mplus/Cognition/cognition.dat";
+  VARIABLE:
+  NAMES = personid cognition age grip sexmw demgroup;
+  MISSING=.;
+  usevariables = cognition;
+
+  analysis:
+   estimator = ml;
+
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING in MODEL command
+  All variables are uncorrelated with all other variables in the model.
+  Check that this is what is intended.
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Cognition Example
+From Hoffman, Chapter 2.
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         550
+
+Number of dependent variables                                    1
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   COGNITION
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  mplus/Cognition/cognition.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              COGNITIO
+              ________
+ COGNITIO       1.000
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     COGNITION            24.822      -0.260       0.000    2.18%      15.000     22.000     25.000
+             550.000     120.539      -0.607      44.000    2.36%      28.000     35.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        2
+
+Loglikelihood
+
+          H0 Value                       -2098.209
+          H1 Value                       -2098.209
+
+Information Criteria
+
+          Akaike (AIC)                    4200.418
+          Bayesian (BIC)                  4209.038
+          Sample-Size Adjusted BIC        4202.689
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.000  0.000
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ Means
+    COGNITION         24.822      0.468     53.021      0.000
+
+ Variances
+    COGNITION        120.539      7.269     16.583      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.978E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+     Beginning Time:  09:09:41
+        Ending Time:  09:09:41
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2018 Muthen & Muthen
