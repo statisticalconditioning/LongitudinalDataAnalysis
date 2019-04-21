@@ -20,9 +20,9 @@ names(nlsy_math_long)<-c('id', 'female', 'low_birth_weight', 'anti_k1', 'math', 
 
 library(ggplot2)
 
-plot_obs <- ggplot(data=nlsy_math_long, aes(x = grade, y = math, group = id)) + 
+plot_obs <- ggplot(data=nlsy_math_long, aes(x = jitter(grade), y = math, group = id)) + 
   geom_point() +
-                geom_line(color = "gray", alpha = .) + 
+                geom_line(color = "gray", alpha = .2) + 
                 theme_bw() + 
                 scale_x_continuous(breaks = 2:8, name = "Grade") +  
                 scale_y_continuous(name = "PIAT Mathematics")
@@ -61,9 +61,12 @@ intervals(ng.math.lme)
 
 
 #Using lme to fit Linear Growth Model to Mathematics Data
-grade_c2 <- grade - 2
+nlsy_math_long <- within(nlsy_math_long, {
+  grade_c2 <- grade - 2
+})
 
-lg.math.lme <- lme(math ~ grade_c2, random= ~ grade_c2 |id, data = nlsy_math_long, method="ML")
+lg.math.lme <- lme(math ~ grade_c2, random= ~ grade_c2 |id, 
+                   data = nlsy_math_long, method="ML")
 summary(lg.math.lme)
 
 #Linear mixed-effects model fit by maximum likelihood
