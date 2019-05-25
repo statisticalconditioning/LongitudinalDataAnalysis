@@ -25,7 +25,6 @@ rm(path)
 names(eclsk11) <- tolower(names(eclsk11))
 
 # Recoded missing data values less than 0 as NA.
-
 eclsk11 <- eclsk11 %>% 
   mutate_at(.vars = vars(childid:p8schrwk),
              .funs = funs(ifelse(. < 0, NA, .)))

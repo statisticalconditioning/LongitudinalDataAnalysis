@@ -3,7 +3,7 @@ ODS HTML CLOSE;
 ODS LISTING;
 
 DATA nlsy_math_long;
-	INFILE 'C:\GRE2016\Data\nlsy_math_long_R.dat';
+	INFILE 'C:\Users\wmm0017\Dropbox\Data\Grimm_Data\nlsy_math_long_R.dat';
 	INPUT 
 		id		female 		low_birth_weight		anti_k1
 		math 	grade		occ						age
