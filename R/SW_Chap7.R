@@ -11,7 +11,79 @@ library(tidyverse)
 library(nlme)
 library(texreg)
 
-opposites <- read.table("https://stats.idre.ucla.edu/stat/r/examples/alda/data/opposites_pp.txt",header=TRUE,sep=",")
+opposites <- read.table("https://stats.
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(
+
+library(mosaic)
+library(mosaicCalc)
+
+
+fx <- makeFun(idre.ucla.edu/stat/r/examples/alda/data/opposites_pp.txt",header=TRUE,sep=",")
 
 opposites <- opposites %>% 
   mutate(id = factor(id),

@@ -13,11 +13,9 @@ library(TSstudio)
 
 run1 <- readTCX("data/tcx/activity_3146091492.tcx")
 
-
 r1 <- run1 %>% 
   select(-distance)
 
-plot.ts(run1$time, run1$heart_rate, xy.lines = TRUE)
-
+plot.ts(run1$time, run1$heart_rate, xy.lines = TRUE)  
 
 ts_plot(r1, type = "single")
