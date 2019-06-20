@@ -4,40 +4,57 @@
 ## Plot longitudinal data in R                           ##
 ## By Kevin J. Grimm                                     ##
 ###########################################################
-
+library(car)
+library(mosaic)
+library(psych)
 library(nlme)
 
 # Load the data
-nlsy_math_long<-read.table("../../Dropbox/Data/Grimm_Data/nlsy_math_long_R.dat", na.strings='.')
+nlsy_ml <-read.table("../../Dropbox/Data/Grimm_Data/nlsy_math_long_R.dat", 
+                           na.strings='.')
 
 # Give the variable names
-names(nlsy_math_long)<-c('id', 'female', 'low_birth_weight', 'anti_k1', 'math', 'grade', 'occ', 'age', 'men', 'spring', 'anti')
+names(nlsy_ml)<-c('id', 'female', 'low_birth_weight', 'anti_k1', 'math', 
+                         'grade', 'occ', 'age', 'men', 'spring', 'anti')
 
-# attach(nlsy_math_long)
+
+describe(nlsy_ml, fast = TRUE)
+# attach(nlsy_ml)
 
 #Plot of the Longitudinal Data
 #interaction.plot(grade,id,math,xlab='Grade',ylab='PIAT Mathematics',legend=F)
 
 library(ggplot2)
 
-plot_obs <- ggplot(data=nlsy_math_long, aes(x = jitter(grade), y = math, group = id)) + 
-  geom_point() +
-                geom_line(color = "gray", alpha = .2) + 
-                theme_bw() + 
-                scale_x_continuous(breaks = 2:8, name = "Grade") +  
-                scale_y_continuous(name = "PIAT Mathematics")
+plot_obs <- ggplot(data=nlsy_ml, aes(x = grade, y = math, group = id)) + 
+  geom_point(color = "grey") +
+  geom_line(color = "black", alpha = .5) + 
+  theme_bw() + 
+  scale_x_continuous(breaks = 2:8, name = "Grade") +  
+  scale_y_continuous(name = "PIAT Mathematics")
 
 
 print(plot_obs)
 
+n_sample <- 75
+sample_ids <- sample(unique(nlsy_ml$id), n_sample, replace = FALSE )
+plot_obs_sample <- ggplot(data=nlsy_ml[nlsy_ml$id %in% sample_ids, ], 
+                          aes(x = grade, y = math, group = id)) + 
+  geom_point(color = "grey") +
+  geom_line(color = "black", alpha = .5) + 
+  theme_bw() + 
+  scale_x_continuous(breaks = 2:8, name = "Grade") +  
+  scale_y_continuous(name = "PIAT Mathematics")
+
+plot_obs_sample
 library(nlme)
 
 #Using lme to fit No Growth Model to Mathematics Data
-ng.math.lme <- lme(math ~ 1, random= ~1 |id, data = nlsy_math_long, method="ML")
+ng.math.lme <- lme(math ~ 1, random= ~1 |id, data = nlsy_ml, method="ML")
 summary(ng.math.lme)
 
 #Linear mixed-effects model fit by maximum likelihood
-# Data: nlsy_math_long 
+# Data: nlsy_ml 
 #      AIC      BIC    logLik
 #  17497.9 17515.02 -8745.952
 #
@@ -60,17 +77,45 @@ summary(ng.math.lme)
 intervals(ng.math.lme)
 
 
+
+# No-growth with lavaan ---------------------------------------------------
+
+library(lavaan)
+nlsy_mw <- read.table("mplus/Grimm_chap3_LinearGrowth/nlsy_math_wide_R.dat",
+                      na.strings = ".")
+
+names(nlsy_mw) <- c("id", "female", "lb_wght", "anti_k1", 
+                    "math2", "math3", "math4", "math5", "math6", 
+                    "math7", "math8", "age2", "age3", "age4", "age5", "age6",
+                    "age7","age8", "men2","men3", "men4", "men5", "men6",
+                    "men7","men8", "spring2","spring3", "spring4", "spring5",
+                    "spring6", "spring7","spring8", "anti2","anti3", "anti4",
+                    "anti5", "anti6", "anti7", "anti8")
+
+
+ng_math_model <- '
+i =~ 1*math2 + 1*math3 + 1*math4 + 1*math5 + 1*math6 + 1*math7 + 1*math8
+math2 ~~ theta*math2
+math3 ~~ theta*math3
+math4 ~~ theta*math4
+math5 ~~ theta*math5
+math6 ~~ theta*math6
+math7 ~~ theta*math7
+math8 ~~ theta*math8'
+
+ng_math_fit <- growth(model = ng_math_model, data = nlsy_mw, missing = "ML")
+summary(ng_math_fit, fit.measures = TRUE, rsquare = TRUE)
 #Using lme to fit Linear Growth Model to Mathematics Data
-nlsy_math_long <- within(nlsy_math_long, {
+nlsy_ml <- within(nlsy_ml, {
   grade_c2 <- grade - 2
 })
 
 lg.math.lme <- lme(math ~ grade_c2, random= ~ grade_c2 |id, 
-                   data = nlsy_math_long, method="ML")
+                   data = nlsy_ml, method="ML")
 summary(lg.math.lme)
 
 #Linear mixed-effects model fit by maximum likelihood
-# Data: nlsy_math_long 
+# Data: nlsy_ml 
 #       AIC      BIC    logLik
 #  15949.39 15983.62 -7968.693
 #
@@ -99,7 +144,7 @@ summary(lg.math.lme)
 
 #Using nlme to fit No Growth Model to Mathematics Data
 ng.math.nlme <- nlme(math ~ beta_1 + d_1i,
-                     data=nlsy_math_long,                      
+                     data=nlsy_ml,                      
                      fixed=beta_1~1,                      
                      random=d_1i~1,
                      group=~id,                      
@@ -110,7 +155,7 @@ summary(ng.math.nlme)
 
 #Nonlinear mixed-effects model fit by maximum likelihood
 #  Model: math ~ beta_1 + d_1i 
-# Data: nlsy_math_long 
+# Data: nlsy_ml 
 #      AIC      BIC    logLik
 #  17497.9 17515.02 -8745.952
 #
@@ -134,7 +179,7 @@ summary(ng.math.nlme)
 
 #Alternative Specification
 ng.math.nlme <- nlme(math~b_1i,
-                     data=nlsy_math_long,
+                     data=nlsy_ml,
                      fixed=b_1i~1,
                      random=b_1i~1|id,
                      start=c(b_1i=40))
@@ -143,7 +188,7 @@ summary(ng.math.nlme)
 
 #Nonlinear mixed-effects model fit by maximum likelihood
 #  Model: math ~ b_1i 
-# Data: nlsy_math_long 
+# Data: nlsy_ml 
 #      AIC      BIC    logLik
 #  17497.9 17515.02 -8745.952
 #
@@ -166,7 +211,7 @@ summary(ng.math.nlme)
 
 #Using nlme to fit Linear Growth Model to Mathematics Data
 lg.math.nlme <- nlme(math~(beta_1+d_1i)+(beta_2+d_2i)*(grade-2),  
-                   data=nlsy_math_long,                      
+                   data=nlsy_ml,                      
                    fixed=beta_1+beta_2~1,                      
                    random=d_1i+d_2i~1,
                    group=~id,                     
@@ -177,7 +222,7 @@ summary (lg.math.nlme)
 
 #Nonlinear mixed-effects model fit by maximum likelihood
 #  Model: math ~ (beta_1 + d_1i) + (beta_2 + d_2i) * (grade - 2) 
-# Data: nlsy_math_long 
+# Data: nlsy_ml 
 #       AIC      BIC    logLik
 #  15949.39 15983.62 -7968.693
 #
@@ -212,7 +257,7 @@ b_2i_hat = ranef(lg.math.nlme)[,2] + fixef(lg.math.nlme)[2]
 child_id = as.numeric(rownames(ranef(lg.math.nlme)))
 
 estimates <- data.frame(child_id, b_1i_hat, b_2i_hat)
-estimates1 = merge(x = nlsy_math_long, y = estimates,
+estimates1 = merge(x = nlsy_ml, y = estimates,
                 by.x = c('id'), by.y = c('child_id'),
                 all = TRUE)
 
@@ -240,7 +285,7 @@ print(plot_resid)
 
 #Alternative Specification using nlme to fit Linear Growth Model to Mathematics Data
 lg.math.nlme <- nlme(math~b_1i+b_2i*(grade-2),
-                     data=nlsy_math_long,
+                     data=nlsy_ml,
                      fixed=b_1i+b_2i~1,
                      random=b_1i+b_2i~1|id,
                      start=c(b_1i=35, b_2i=4))
@@ -249,7 +294,7 @@ summary(lg.math.nlme)
 
 #Nonlinear mixed-effects model fit by maximum likelihood
 #  Model: math ~ b_1i + b_2i * (grade - 2) 
-# Data: nlsy_math_long 
+# Data: nlsy_ml 
 #       AIC      BIC    logLik
 #  15949.39 15983.62 -7968.693
 #
@@ -282,12 +327,12 @@ summary(lg.math.nlme)
 ##LME4 
 library(lme4)
 
-ng.math.lmer <- lmer(math ~ 1 + (1 | id), data = nlsy_math_long, REML = FALSE)
+ng.math.lmer <- lmer(math ~ 1 + (1 | id), data = nlsy_ml, REML = FALSE)
 summary(ng.math.lmer)
 
 #Linear mixed model fit by maximum likelihood  ['lmerMod']
 #Formula: math ~ 1 + (1 | id)
-#   Data: nlsy_math_long
+#   Data: nlsy_ml
 #
 #     AIC      BIC   logLik deviance df.resid 
 # 17497.9  17515.0  -8746.0  17491.9     2218 
@@ -307,12 +352,12 @@ summary(ng.math.lmer)
 #(Intercept)  45.9147     0.3237   141.8
 
 
-lg.math.lmer <- lmer(math ~ 1 + grade_c2 + (1 + grade_c2 | id), data = nlsy_math_long, REML = FALSE)
+lg.math.lmer <- lmer(math ~ 1 + grade_c2 + (1 + grade_c2 | id), data = nlsy_ml, REML = FALSE)
 summary(lg.math.lmer)
 
 #Linear mixed model fit by maximum likelihood  ['lmerMod']
 #Formula: math ~ 1 + grade_c2 + (1 + grade_c2 | id)
-#   Data: nlsy_math_long
+#   Data: nlsy_ml
 #
 #     AIC      BIC   logLik deviance df.resid 
 # 15949.4  15983.6  -7968.7  15937.4     2215 
@@ -336,3 +381,4 @@ summary(lg.math.lmer)
 #Correlation of Fixed Effects:
 #         (Intr)
 #grade_c2 -0.532
+

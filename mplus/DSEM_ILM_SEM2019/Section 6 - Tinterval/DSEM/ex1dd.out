@@ -1,0 +1,473 @@
+Mplus VERSION 8.1
+MUTHEN & MUTHEN
+06/08/2018   1:32 AM
+
+INPUT INSTRUCTIONS
+
+  variable:    NAMES ARE u y x t c;
+               usevar=y x;
+               cluster=c;
+               lagged=y(1) x(1);
+               missing=all(999);
+               auxiliary=t;
+
+  data:file=c.dat; listwise=on;
+
+  ANALYSIS: 	estimator=bayes;  TYPE IS TWOLEVEL; proc=2; fbiter=100;
+
+  MODEL:
+
+    %WITHIN%
+    y*1 x*1;
+    y on y&1*0.7;
+    y on x*1;
+    x on x&1*0.7;
+
+    %between%
+    y*1 x*1; y on x*1;
+
+  OUTPUT: TECH8;
+  savedata: file=d.dat;
+
+
+
+*** WARNING in MODEL command
+  In the MODEL command, the following variable is an x-variable on the BETWEEN
+  level and a y-variable on the WITHIN level.  This variable will be treated
+  as a y-variable on both levels:  X
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                       12042
+
+Number of dependent variables                                    2
+Number of independent variables                                  2
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   Y           X
+
+Observed independent variables
+   Y&1         X&1
+
+Observed auxiliary variables
+   T
+
+Variables with special functions
+
+  Cluster variable      C
+
+  Within variables
+   Y&1         X&1
+
+
+Estimator                                                    BAYES
+Specifications for Bayesian Estimation
+  Point estimate                                            MEDIAN
+  Number of Markov chain Monte Carlo (MCMC) chains               2
+  Random seed for the first chain                                0
+  Starting value information                           UNPERTURBED
+  Algorithm used for Markov chain Monte Carlo           GIBBS(PX1)
+  Fixed number of iterations                                   100
+  K-th iteration used for thinning                               1
+
+Input data file(s)
+  c.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of clusters                        200
+
+       Size (s)    Cluster ID with Size s
+
+         43        28
+         45        176
+         46        98
+         47        134 7
+         48        93
+         49        123 177 197
+         50        77 89 179 6
+         51        24 72 104 116 91
+         52        139 113 20 33 181 3
+         53        172 35 92
+         54        49 120 83 133 112 96
+         55        67 75 138 86 169 190 194 171
+         56        142 153 157 43 23 80 195 196 173
+         57        95 122 66 130 174 41 100 90 180 69 188 64 150 115 84
+                   158
+         58        12 55 156 22 16 168 44 45 70 140 97
+         59        144 102 152 126 155 62 11 52 160 88 76 39 61
+         60        159 8 163 167 110 182 117 170 191 127 119 114 149 199
+         61        145 161 106 164 9 99 31 154 26 125 56 143 105
+         62        30 118 27 47 121 108 162 85 147 166 111 73 32 42 18
+                   79
+         63        187 54 101 5 178 50 148 128 1
+         64        60 94 51 48 53 65
+         65        109 2 165 68 58 129 103 200
+         66        17 87 71 192 193 141 131 21 34 198 185 175
+         67        63 25 78 183 74 124 13 82 135
+         68        46 132 10 4 15 184 137 107 19 40
+         69        14 81
+         70        146
+         71        29 37 38
+         72        136 36
+         73        189 57
+         74        59 186
+         78        151
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+     Number of missing data patterns             2
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              Y             X
+              ________      ________
+ Y              1.000
+ X              1.000         1.000
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     Y                    -0.161      -0.004     -16.103    0.01%      -3.475     -1.128     -0.175
+           12042.000      15.225      -0.011      13.518    0.01%       0.820      3.151
+     X                     0.092      -0.022      -6.021    0.01%      -1.368     -0.330      0.095
+           12042.000       2.891      -0.130       6.104    0.01%       0.529      1.539
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+     USE THE FBITERATIONS OPTION TO INCREASE THE NUMBER OF ITERATIONS BY A FACTOR
+     OF AT LEAST TWO TO CHECK CONVERGENCE AND THAT THE PSR VALUE DOES NOT INCREASE.
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                              10
+
+Information Criteria
+
+          Deviance (DIC)                        90499.215
+          Estimated Number of Parameters (pD)     404.351
+
+
+
+MODEL RESULTS
+
+                                Posterior  One-Tailed         95% C.I.
+                    Estimate       S.D.      P-Value   Lower 2.5%  Upper 2.5%  Significance
+
+Within Level
+
+ Y          ON
+    Y&1                0.415       0.005      0.000       0.406       0.425      *
+    X                  1.662       0.013      0.000       1.633       1.685      *
+
+ X          ON
+    X&1                0.380       0.008      0.000       0.363       0.396      *
+
+ Residual Variances
+    Y                  3.561       0.048      0.000       3.473       3.660      *
+    X                  1.712       0.023      0.000       1.666       1.755      *
+
+Between Level
+
+ Y          ON
+    X                 -0.873       0.119      0.000      -1.134      -0.620      *
+
+ Means
+    X                  0.094       0.075      0.090      -0.046       0.237
+
+ Intercepts
+    Y                 -0.063       0.111      0.290      -0.309       0.136
+
+ Variances
+    X                  0.893       0.102      0.000       0.733       1.139      *
+
+ Residual Variances
+    Y                  1.157       0.233      0.000       0.853       1.765      *
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           LAMBDA
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+ Y                  0             0             0             0
+ X                  0             0             0             0
+ Y&1                0             0             0             0
+ X&1                0             0             0             0
+
+
+           THETA
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+ Y                  0
+ X                  0             0
+ Y&1                0             0             0
+ X&1                0             0             0             0
+
+
+           ALPHA
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           BETA
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+ Y                  0             1             2             0
+ X                  0             0             0             3
+ Y&1                0             0             0             0
+ X&1                0             0             0             0
+
+
+           PSI
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+ Y                  4
+ X                  0             5
+ Y&1                0             0             0
+ X&1                0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              Y             X
+              ________      ________
+                    0             0
+
+
+           LAMBDA
+              Y             X
+              ________      ________
+ Y                  0             0
+ X                  0             0
+
+
+           THETA
+              Y             X
+              ________      ________
+ Y                  0
+ X                  0             0
+
+
+           ALPHA
+              Y             X
+              ________      ________
+                    6             7
+
+
+           BETA
+              Y             X
+              ________      ________
+ Y                  0             8
+ X                  0             0
+
+
+           PSI
+              Y             X
+              ________      ________
+ Y                  9
+ X                  0            10
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+ Y              1.000         0.000         0.000         0.000
+ X              0.000         1.000         0.000         0.000
+ Y&1            0.000         0.000         1.000         0.000
+ X&1            0.000         0.000         0.000         1.000
+
+
+           THETA
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+ Y              0.000
+ X              0.000         0.000
+ Y&1            0.000         0.000         0.000
+ X&1            0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           BETA
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+ Y              0.000         1.000         0.700         0.000
+ X              0.000         0.000         0.000         0.700
+ Y&1            0.000         0.000         0.000         0.000
+ X&1            0.000         0.000         0.000         0.000
+
+
+           PSI
+              Y             X             Y&1           X&1
+              ________      ________      ________      ________
+ Y              1.000
+ X              0.000         1.000
+ Y&1            0.000         0.000         7.613
+ X&1            0.000         0.000         0.000         1.447
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              Y             X
+              ________      ________
+                0.000         0.000
+
+
+           LAMBDA
+              Y             X
+              ________      ________
+ Y              1.000         0.000
+ X              0.000         1.000
+
+
+           THETA
+              Y             X
+              ________      ________
+ Y              0.000
+ X              0.000         0.000
+
+
+           ALPHA
+              Y             X
+              ________      ________
+               -0.161         0.092
+
+
+           BETA
+              Y             X
+              ________      ________
+ Y              0.000         1.000
+ X              0.000         0.000
+
+
+           PSI
+              Y             X
+              ________      ________
+ Y              1.000
+ X              0.000         1.000
+
+
+
+     PRIORS FOR ALL PARAMETERS            PRIOR MEAN      PRIOR VARIANCE     PRIOR STD. DEV.
+
+     Parameter 1~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 2~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 3~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 4~IG(-1.000,0.000)          infinity            infinity            infinity
+     Parameter 5~IG(-1.000,0.000)          infinity            infinity            infinity
+     Parameter 6~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 7~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 8~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 9~IG(-1.000,0.000)          infinity            infinity            infinity
+     Parameter 10~IG(-1.000,0.000)         infinity            infinity            infinity
+
+
+TECHNICAL 8 OUTPUT
+
+
+   TECHNICAL 8 OUTPUT FOR BAYES ESTIMATION
+
+     CHAIN    BSEED
+     1        0
+     2        285380
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.071               9
+     200              1.014               8
+
+
+SAVEDATA INFORMATION
+
+
+  Save file
+    d.dat
+
+  Order and format of variables
+
+    Y              F10.3
+    X              F10.3
+    Y&1            F10.3
+    X&1            F10.3
+    T              F10.3
+    C              I4
+    _TIMEPOINT     I3
+
+  Save file format
+    5F10.3 I4 I3
+
+  Save file record length    10000
+
+
+     Beginning Time:  01:32:20
+        Ending Time:  01:32:21
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2018 Muthen & Muthen

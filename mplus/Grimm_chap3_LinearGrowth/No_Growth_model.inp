@@ -22,4 +22,4 @@ MODEL:     eta_1 BY math2-math8@1;
            math2-math8 (theta);     
            [math2-math8@0];
 
-OUTPUT: SAMPSTAT; 
+OUTPUT: SAMPSTAT stdyx; 

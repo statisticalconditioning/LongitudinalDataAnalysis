@@ -1,0 +1,44 @@
+TITLE:     Linear Growth Model - PIAT Mathematics Data;
+
+DATA:      FILE= 'nlsy_math_wide_R.dat';
+
+VARIABLE:  NAMES = 
+    id female lb_wght anti_k1
+    math2-math8
+    age2-age8
+    men2-men8
+    spring2-spring8
+    anti2-anti8;
+
+  MISSING = .;
+
+  USEVAR = 
+    math2-math8;
+
+ANALYSIS:  ! TYPE= MEANSTRUCTURE;
+            COVERAGE=0;
+
+MODEL:     
+    eta_1 BY math2-math8@1;     
+    eta_1;     
+    [eta_1];
+    eta_2 BY math2@0             
+             math3@1             
+             math4@2             
+             math5@3             
+             math6@4             
+             math7@5             
+             math8@6;     
+    eta_2;     
+    [eta_2];
+    eta_1 WITH eta_2;
+    math2-math8 (v_u);     
+    [math2-math8@0];
+OUTPUT: SAMPSTAT;
+
+PLOT:     
+    TYPE = PLOT3;     
+    SERIES = math2-math8(eta_2);
+SAVEDATA:     
+    FILE = factor_scores.dat;     
+    SAVE = FSCORES;

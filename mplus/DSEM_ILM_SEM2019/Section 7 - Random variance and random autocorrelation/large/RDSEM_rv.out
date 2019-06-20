@@ -1,0 +1,1311 @@
+Mplus VERSION 8.1
+MUTHEN & MUTHEN
+06/11/2018   5:32 PM
+
+INPUT INSTRUCTIONS
+
+  MONTECARLO:  NAMES ARE y x;
+               NOBS = 50000;
+               NREP = 100;
+               NCSIZES = 1;
+               CSIZES = 500(100);
+               lagged=y(1);
+               within=x;
+
+  ANALYSIS: 	estimator=bayes;  TYPE IS TWOLEVEL RANDOM; proc=2;
+
+
+  MODEL MONTECARLO:
+
+    %WITHIN%
+    v | y; x*1;
+    y on x*1;
+    r | y^ on y^1;
+
+    %between%
+    y*1; r*0.02; [r*0.4];
+    v*1; [v*0]; v with r*0.08;
+
+  MODEL:
+
+    %WITHIN%
+    v | y;
+    y on x*1;
+    r | y^ on y^1;
+
+    %between%
+    y*1; r*0.02; [r*0.4];
+    v*1; [v*0]; v with r*0.08;
+
+
+  OUTPUT: TECH8;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                       50000
+
+Number of replications
+    Requested                                                  100
+    Completed                                                   99
+Value of seed                                                    0
+
+Number of dependent variables                                    1
+Number of independent variables                                  2
+Number of continuous latent variables                            2
+
+Observed dependent variables
+
+  Continuous
+   Y
+
+Observed independent variables
+   X           Y^1
+
+Continuous latent variables
+   V           R
+
+Variables with special functions
+
+  Within variables
+   X           Y^1
+
+
+Estimator                                                    BAYES
+Specifications for Bayesian Estimation
+  Point estimate                                            MEDIAN
+  Number of Markov chain Monte Carlo (MCMC) chains               2
+  Random seed for the first chain                                0
+  Starting value information                           UNPERTURBED
+  Algorithm used for Markov chain Monte Carlo           GIBBS(PX1)
+  Convergence criterion                                  0.500D-01
+  Maximum number of iterations                               50000
+  K-th iteration used for thinning                               1
+
+
+SUMMARY OF DATA FOR THE FIRST REPLICATION
+
+     Cluster information
+
+       Size (s)    Number of clusters of Size s
+
+        100           500
+
+
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        8
+
+Information Criteria
+
+    Deviance (DIC)
+
+        Mean                            142984.599
+        Std Dev                           2285.625
+        Number of successful computations       99
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.990       137667.550     137232.741
+           0.980       0.980       138290.611     137232.741
+           0.950       0.929       139224.974     138788.861
+           0.900       0.889       140055.342     139486.589
+           0.800       0.818       141061.017     141248.365
+           0.700       0.758       141786.017     142007.425
+           0.500       0.485       142984.599     142833.452
+           0.300       0.253       144183.181     143772.739
+           0.200       0.172       144908.181     144685.375
+           0.100       0.101       145913.856     145568.850
+           0.050       0.061       146744.223     146945.443
+           0.020       0.040       147678.587     148143.880
+           0.010       0.020       148301.648     148752.368
+
+    Estimated Number of Parameters (pD)
+
+        Mean                               889.700
+        Std Dev                             48.352
+        Number of successful computations       99
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.980          777.219        740.653
+           0.980       0.960          790.400        740.653
+           0.950       0.960          810.166        788.996
+           0.900       0.939          827.732        829.066
+           0.800       0.758          849.007        844.636
+           0.700       0.677          864.344        859.121
+           0.500       0.545          889.700        894.520
+           0.300       0.303          915.055        913.624
+           0.200       0.202          930.392        929.739
+           0.100       0.101          951.667        951.359
+           0.050       0.010          969.233        961.953
+           0.020       0.000          988.999        965.348
+           0.010       0.000         1002.180        968.451
+
+
+
+MODEL RESULTS
+
+                              ESTIMATES              S. E.     M. S. E.  95%  % Sig
+                 Population   Average   Std. Dev.   Average             Cover Coeff
+Within Level
+
+ Y          ON
+  X                   1.000     0.9999     0.0032     0.0034     0.0000 0.939 1.000
+
+Between Level
+
+ V        WITH
+  R                   0.080     0.0811     0.0087     0.0086     0.0001 0.939 1.000
+
+ Means
+  Y                   0.000     0.0021     0.0470     0.0461     0.0022 0.929 0.071
+  V                   0.000     0.0016     0.0451     0.0456     0.0020 0.939 0.061
+  R                   0.400     0.4011     0.0082     0.0076     0.0001 0.970 1.000
+
+ Variances
+  Y                   1.000     0.9939     0.0692     0.0670     0.0048 0.939 1.000
+  V                   1.000     1.0130     0.0655     0.0663     0.0044 0.949 1.000
+  R                   0.020     0.0200     0.0020     0.0018     0.0000 0.919 1.000
+
+
+CORRELATIONS AND MEAN SQUARE ERROR OF THE TRUE FACTOR VALUES AND THE FACTOR SCORES
+
+                        CORRELATIONS                MEAN SQUARE ERROR
+                    Average    Std. Dev.           Average    Std. Dev.
+  V                   0.989       0.001              0.187       0.006
+  R                   0.850       0.013              0.074       0.002
+  Y                   0.970       0.005              0.243       0.016
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              Y             X             Y^1
+              ________      ________      ________
+                    0             0             0
+
+
+           LAMBDA
+              Y             X             Y^1
+              ________      ________      ________
+ Y                  0             0             0
+ X                  0             0             0
+ Y^1                0             0             0
+
+
+           THETA
+              Y             X             Y^1
+              ________      ________      ________
+ Y                  0
+ X                  0             0
+ Y^1                0             0             0
+
+
+           ALPHA
+              Y             X             Y^1
+              ________      ________      ________
+                    0             0             0
+
+
+           BETA
+              Y             X             Y^1
+              ________      ________      ________
+ Y                  0             1             0
+ X                  0             0             0
+ Y^1                0             0             0
+
+
+           PSI
+              Y             X             Y^1
+              ________      ________      ________
+ Y                  0
+ X                  0             0
+ Y^1                0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              Y
+              ________
+                    0
+
+
+           LAMBDA
+              V             R             Y
+              ________      ________      ________
+ Y                  0             0             0
+
+
+           THETA
+              Y
+              ________
+ Y                  0
+
+
+           ALPHA
+              V             R             Y
+              ________      ________      ________
+                    2             3             4
+
+
+           BETA
+              V             R             Y
+              ________      ________      ________
+ V                  0             0             0
+ R                  0             0             0
+ Y                  0             0             0
+
+
+           PSI
+              V             R             Y
+              ________      ________      ________
+ V                  5
+ R                  6             7
+ Y                  0             0             8
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              Y             X             Y^1
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           LAMBDA
+              Y             X             Y^1
+              ________      ________      ________
+ Y              1.000         0.000         0.000
+ X              0.000         1.000         0.000
+ Y^1            0.000         0.000         1.000
+
+
+           THETA
+              Y             X             Y^1
+              ________      ________      ________
+ Y              0.000
+ X              0.000         0.000
+ Y^1            0.000         0.000         0.000
+
+
+           ALPHA
+              Y             X             Y^1
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           BETA
+              Y             X             Y^1
+              ________      ________      ________
+ Y              0.000         1.000         0.000
+ X              0.000         0.000         0.000
+ Y^1            0.000         0.000         0.000
+
+
+           PSI
+              Y             X             Y^1
+              ________      ________      ________
+ Y              0.000
+ X              0.000         0.500
+ Y^1            0.000         0.000         0.500
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              Y
+              ________
+                0.000
+
+
+           LAMBDA
+              V             R             Y
+              ________      ________      ________
+ Y              0.000         0.000         1.000
+
+
+           THETA
+              Y
+              ________
+ Y              0.000
+
+
+           ALPHA
+              V             R             Y
+              ________      ________      ________
+                0.000         0.400         0.000
+
+
+           BETA
+              V             R             Y
+              ________      ________      ________
+ V              0.000         0.000         0.000
+ R              0.000         0.000         0.000
+ Y              0.000         0.000         0.000
+
+
+           PSI
+              V             R             Y
+              ________      ________      ________
+ V              1.000
+ R              0.080         0.020
+ Y              0.000         0.000         1.000
+
+
+     POPULATION VALUES FOR WITHIN
+
+
+           NU
+              Y             X             Y^1
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           LAMBDA
+              Y             X             Y^1
+              ________      ________      ________
+ Y              1.000         0.000         0.000
+ X              0.000         1.000         0.000
+ Y^1            0.000         0.000         1.000
+
+
+           THETA
+              Y             X             Y^1
+              ________      ________      ________
+ Y              0.000
+ X              0.000         0.000
+ Y^1            0.000         0.000         0.000
+
+
+           ALPHA
+              Y             X             Y^1
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           BETA
+              Y             X             Y^1
+              ________      ________      ________
+ Y              0.000         1.000         0.000
+ X              0.000         0.000         0.000
+ Y^1            0.000         0.000         0.000
+
+
+           PSI
+              Y             X             Y^1
+              ________      ________      ________
+ Y              0.000
+ X              0.000         1.000
+ Y^1            0.000         0.000         1.000
+
+
+     POPULATION VALUES FOR BETWEEN
+
+
+           NU
+              Y
+              ________
+                0.000
+
+
+           LAMBDA
+              V             R             Y
+              ________      ________      ________
+ Y              0.000         0.000         1.000
+
+
+           THETA
+              Y
+              ________
+ Y              0.000
+
+
+           ALPHA
+              V             R             Y
+              ________      ________      ________
+                0.000         0.400         0.000
+
+
+           BETA
+              V             R             Y
+              ________      ________      ________
+ V              0.000         0.000         0.000
+ R              0.000         0.000         0.000
+ Y              0.000         0.000         0.000
+
+
+           PSI
+              V             R             Y
+              ________      ________      ________
+ V              1.000
+ R              0.080         0.020
+ Y              0.000         0.000         1.000
+
+
+
+     PRIORS FOR ALL PARAMETERS            PRIOR MEAN      PRIOR VARIANCE     PRIOR STD. DEV.
+
+     Parameter 1~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 2~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 3~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 4~N(0.000,infinity)           0.0000            infinity            infinity
+     Parameter 5~IW(0.000,-3)              infinity            infinity            infinity
+     Parameter 6~IW(0.000,-3)              infinity            infinity            infinity
+     Parameter 7~IW(0.000,-3)              infinity            infinity            infinity
+     Parameter 8~IG(-1.000,0.000)          infinity            infinity            infinity
+
+
+TECHNICAL 8 OUTPUT
+
+
+   TECHNICAL 8 OUTPUT FOR BAYES ESTIMATION
+
+     CHAIN    BSEED
+     1        0
+     2        285380
+
+     REPLICATION 1:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.015               2
+     200              1.018               5
+
+     REPLICATION 2:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.028               2
+     200              1.000               1
+
+     REPLICATION 3:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.000               1
+     200              1.009               8
+
+     REPLICATION 4:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.021               3
+     200              1.008               4
+
+     REPLICATION 5:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.059               2
+     200              1.021               8
+
+     REPLICATION 6:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.029               4
+     200              1.013               2
+
+     REPLICATION 7:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.007               5
+     200              1.018               2
+
+     REPLICATION 8:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.020               5
+     200              1.005               6
+
+     REPLICATION 9:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.102               4
+     200              1.011               6
+
+     REPLICATION 10:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.010               4
+     200              1.005               8
+
+     REPLICATION 11:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.017               6
+     200              1.018               5
+
+     REPLICATION 12:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.060               3
+     200              1.011               2
+
+     REPLICATION 13:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.012               8
+     200              1.004               4
+
+     REPLICATION 14:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.023               8
+     200              1.021               8
+
+     REPLICATION 15:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.021               4
+     200              1.008               6
+
+     REPLICATION 16:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.128               4
+     200              1.013               2
+
+     REPLICATION 17:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.008               5
+     200              1.019               8
+
+     REPLICATION 18:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.043               3
+     200              1.013               4
+
+     REPLICATION 19:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.010               3
+     200              1.023               5
+
+     REPLICATION 20:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.039               8
+     200              1.001               2
+
+     REPLICATION 21:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.056               8
+     200              1.008               8
+
+     REPLICATION 22:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.030               4
+     200              1.023               4
+
+     REPLICATION 23:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.033               8
+     200              1.028               6
+
+     REPLICATION 24:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.011               5
+     200              1.012               4
+
+     REPLICATION 25:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.096               4
+     200              1.030               4
+
+     REPLICATION 26:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.004               2
+     200              1.007               8
+
+     REPLICATION 27:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.000               1
+     200              1.043               6
+
+     REPLICATION 28:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.107               3
+     200              1.020               3
+
+     REPLICATION 29:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.032               2
+     200              1.032               5
+
+     REPLICATION 30:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.000               1
+     200              1.022               8
+
+     REPLICATION 31:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.031               6
+     200              1.005               8
+
+     REPLICATION 32:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.029               5
+     200              1.019               5
+
+     REPLICATION 33:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.003               3
+     200              1.015               3
+
+     REPLICATION 34:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.013               6
+     200              1.005               6
+
+     REPLICATION 35:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.040               3
+     200              1.011               2
+
+     REPLICATION 36:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.000               1
+     200              1.020               3
+
+     REPLICATION 37:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.015               4
+     200              1.025               5
+
+     REPLICATION 38:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.128               3
+     200              1.017               2
+
+     REPLICATION 39:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.057               6
+     200              1.010               2
+
+     REPLICATION 40:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.016               6
+     200              1.021               3
+
+     REPLICATION 42:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.028               2
+     200              1.027               3
+
+     REPLICATION 43:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.034               4
+     200              1.010               2
+
+     REPLICATION 44:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.007               6
+     200              1.005               5
+
+     REPLICATION 45:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.001               5
+     200              1.022               3
+
+     REPLICATION 46:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.005               4
+     200              1.009               5
+
+     REPLICATION 47:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.024               3
+     200              1.002               4
+
+     REPLICATION 48:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.004               3
+     200              1.000               1
+
+     REPLICATION 49:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.014               3
+     200              1.016               2
+
+     REPLICATION 50:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.024               5
+     200              1.013               6
+
+     REPLICATION 51:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.011               6
+     200              1.009               5
+
+     REPLICATION 52:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.073               3
+     200              1.008               4
+
+     REPLICATION 53:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.107               3
+     200              1.010               3
+
+     REPLICATION 54:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.022               8
+     200              1.012               4
+
+     REPLICATION 55:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.018               5
+     200              1.019               6
+
+     REPLICATION 56:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.018               5
+     200              1.004               2
+
+     REPLICATION 57:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.006               3
+     200              1.004               6
+
+     REPLICATION 58:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.000               1
+     200              1.000               1
+
+     REPLICATION 59:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.000               1
+     200              1.024               5
+
+     REPLICATION 60:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.077               2
+     200              1.016               6
+
+     REPLICATION 61:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.000               3
+     200              1.014               4
+
+     REPLICATION 62:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.043               4
+     200              1.000               1
+
+     REPLICATION 63:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.006               4
+     200              1.020               6
+
+     REPLICATION 64:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.000               2
+     200              1.003               2
+
+     REPLICATION 65:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.005               5
+     200              1.008               4
+
+     REPLICATION 66:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.022               5
+     200              1.008               6
+
+     REPLICATION 67:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.029               8
+     200              1.009               2
+
+     REPLICATION 68:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.010               8
+     200              1.013               8
+
+     REPLICATION 69:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.026               8
+     200              1.020               2
+
+     REPLICATION 70:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.013               3
+     200              1.018               8
+
+     REPLICATION 71:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.014               4
+     200              1.012               8
+
+     REPLICATION 72:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.070               8
+     200              1.025               4
+
+     REPLICATION 73:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.044               6
+     200              1.015               5
+
+     REPLICATION 74:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.042               3
+     200              1.000               3
+
+     REPLICATION 75:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.015               6
+     200              1.019               3
+
+     REPLICATION 76:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.052               2
+     200              1.006               3
+
+     REPLICATION 77:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.050               8
+     200              1.055               4
+
+     REPLICATION 78:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.039               8
+     200              1.002               3
+
+     REPLICATION 79:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.019               5
+     200              1.004               6
+
+     REPLICATION 80:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.041               3
+     200              1.015               6
+
+     REPLICATION 81:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.020               4
+     200              1.021               6
+
+     REPLICATION 82:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.022               3
+     200              1.004               4
+
+     REPLICATION 83:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.014               2
+     200              1.018               3
+
+     REPLICATION 84:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.007               2
+     200              1.018               6
+
+     REPLICATION 85:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.008               5
+     200              1.006               4
+
+     REPLICATION 86:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.021               6
+     200              1.000               1
+
+     REPLICATION 87:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.005               8
+     200              1.014               3
+
+     REPLICATION 88:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.040               6
+     200              1.005               4
+
+     REPLICATION 89:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.024               8
+     200              1.008               3
+
+     REPLICATION 90:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.036               4
+     200              1.010               5
+
+     REPLICATION 91:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.000               6
+     200              1.013               4
+
+     REPLICATION 92:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.009               4
+     200              1.008               3
+
+     REPLICATION 93:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.002               5
+     200              1.000               1
+
+     REPLICATION 94:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.000               1
+     200              1.046               6
+
+     REPLICATION 95:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.033               8
+     200              1.030               4
+
+     REPLICATION 96:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.019               5
+     200              1.054               4
+
+     REPLICATION 97:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.041               4
+     200              1.031               8
+
+     REPLICATION 98:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.007               8
+     200              1.023               2
+
+     REPLICATION 99:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.016               4
+     200              1.018               5
+
+     REPLICATION 100:
+
+
+                     POTENTIAL       PARAMETER WITH
+     ITERATION    SCALE REDUCTION      HIGHEST PSR
+     100              1.002               8
+     200              1.038               4
+
+
+TECHNICAL 9 OUTPUT
+
+  Error messages for each replication (if any)
+
+
+     THE GENERATED DATA FOR REPLICATION 41 HAS LARGE VALUES.
+     THIS MAY BE DUE TO AUTOREGRESSIVE COEFFICIENT GREATER THAN 1.
+     MODEL ESTIMATION WILL NOT BE INITIATED FOR THIS REPLICATION.
+
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  17:32:44
+        Ending Time:  18:28:36
+       Elapsed Time:  00:55:52
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2018 Muthen & Muthen

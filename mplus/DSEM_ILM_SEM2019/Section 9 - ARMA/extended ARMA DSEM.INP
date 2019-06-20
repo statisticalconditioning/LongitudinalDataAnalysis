@@ -1,0 +1,31 @@
+MONTECARLO:  NAMES ARE y;
+             NOBS = 200;
+             NREP = 100;
+             lagged=y(1);
+
+ANALYSIS: 	estimator=bayes; proc=2;
+        
+
+MODEL MONTECARLO:
+
+  f by y@1 (&1);
+  y on y&1*0.6 f&1*0.4;
+  y@.00001;
+  f*1;
+
+MODEL:
+
+  f by y@1 (&1);
+  y on y&1*0.6
+       f&1*0.4 (b);
+  y@.1;
+  f*1 (v);
+
+model constraint:
+new(L); L=((1+b**2)*v+0.1)/(b*v);
+new(fb*0.4); fb=0.5*(L-sqrt(L**2-4));
+new(fv*1); fv=b*v/fb;
+
+
+
+OUTPUT: TECH8;

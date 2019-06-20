@@ -1,0 +1,20 @@
+variable:    NAMES ARE y;
+             lagged=y(2);
+
+data: file=alist.dat; type=montecarlo;
+
+ANALYSIS: 	 proc=2;
+            estimator=bayes;
+
+MODEL:
+
+  y*1;
+  y^ on y^1*0.5 (r1);
+  y^ on y^2*0.2 (r2);
+  [y*1] (m);
+
+model constraints: new(nm*1); nm=m*(1-r1-r2);
+
+OUTPUT: TECH8;
+
+savedata:results=rs.dat;

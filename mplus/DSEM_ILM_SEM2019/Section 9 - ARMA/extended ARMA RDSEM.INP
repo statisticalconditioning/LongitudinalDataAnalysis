@@ -1,0 +1,40 @@
+MONTECARLO:  NAMES ARE y x;
+             NOBS = 20000;
+             NREP = 100;
+             NCSIZES = 1;
+             CSIZES = 200(100);
+             lagged=y(1);
+
+ANALYSIS: 	estimator=bayes; proc=2;
+            type=twolevel;
+
+MODEL MONTECARLO:
+
+  %WITHIN%
+  f by y@1 (&1);
+  y^ on y^1*0.3 f^1*0.7;
+  y@.00001; f*1;
+  y on x*1; x*1;
+  %BETWEEN%
+  y on x*0.5; y*1 x*1;
+
+MODEL:
+
+  %WITHIN%
+  f by y@1 (&1);
+  y^ on y^1*0.3 (a)
+       f^1*0.7 (b);
+  y@.2; f*1 (v);
+  y on x*1; x*1;
+  %BETWEEN%
+  y on x*0.5; y*1 x*1;
+
+model constraint:
+new(L); L=((1+(b-a)**2)*v+0.2)/((b-a)*v);
+new(fb*0.7); fb=0.5*(L-sqrt(L**2-4))+a;
+new(fb0*0.4); fb0=0.5*(L-sqrt(L**2-4));
+new(fv*1); fv=(b-a)*v/(fb-a);
+
+
+
+OUTPUT: TECH8;

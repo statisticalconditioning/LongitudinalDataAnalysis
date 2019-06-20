@@ -1,0 +1,45 @@
+MONTECARLO:  NAMES ARE y x u;
+             NOBS = 48000;
+             NREP = 100;
+             NCSIZES = 1[1];
+   		     CSIZES = 200[240(1)];
+             repsave=all;
+             save=c*.dat;
+             missing=y x;
+             categorical=u;
+             generate=u(1);
+             within=u;
+             lagged=y(1) x(1);
+
+model missing: [y@-15]; y on u@30;
+               [x@-15]; x on u@30;
+
+ANALYSIS: 	estimator=bayes;  TYPE IS cross; proc=2; FBITER=100;
+        
+
+MODEL MONTECARLO:
+
+  %WITHIN%
+  y*1 x*1;
+  y on y&1*0.7;
+  y on x*1;
+  x on x&1*0.7;
+  [u$1*-0.674];
+
+  %between LEVEL2A%
+  %between LEVEL2b%
+  y*1 x*1; y on x*-1;
+
+MODEL:
+
+  %WITHIN%
+  y*1 x*1;
+  y on y&1*0.7;
+  y on x*1;
+  x on x&1*0.7;
+
+  %between LEVEL2A%
+  %between LEVEL2b%
+  y*1 x*1; y on x*-1;
+
+OUTPUT: TECH8;

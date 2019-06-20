@@ -1,0 +1,43 @@
+MONTECARLO:  NAMES ARE y1-y3;
+             NOBS = 6000;
+             NREP = 100;
+             NCSIZES = 1;
+             CSIZES = 200(30);
+             lagged=y1-y3(1);
+
+ANALYSIS: 	estimator=bayes; proc=2;
+            type=twolevel;
+
+MODEL MONTECARLO:
+
+  %within%
+  y1-y3*1;
+  y1^ on y1^1*0.2; 
+  y2^ on y2^1*0.6; 
+  y3^ on y3^1*0; 
+  e by y1-y3*1 (&1);
+  e by y1-y3*1;
+  e^ on e^1*0.5;
+  e@1;
+  %between%
+  eb by y1-y3*1;
+  eb@1; y1-y3*1;
+
+
+MODEL:
+
+  %within%
+  y1-y3*1;
+  y1^ on y1^1*0.2; 
+  y2^ on y2^1*0.6; 
+  y3^ on y3^1*0; 
+  e by y1-y3 (&1);
+  e by y2-y3*1;
+  e^ on e^1*0.5;
+  e*1;
+  %between%
+  eb by y1@1 
+        y2-y3*1;
+  eb*1; y1-y3*1;
+
+OUTPUT: TECH8;

@@ -1,0 +1,26 @@
+variable:    NAMES ARE y x c;
+             cluster=c;
+             lagged=y(1) x(1);
+             missing=all(999);
+
+data: file=alist.dat; type=montecarlo;
+
+ANALYSIS: 	 TYPE IS TWOLEVEL; proc=2;
+            estimator=bayes;
+
+MODEL:
+
+MODEL:
+
+  %WITHIN%
+  y*1 x*1;
+  y^ on y^1@0;
+  y on x*1;
+  x^ on x^1@0;
+
+  %between%
+  y*1 x*1; y on x*-1;
+  [x*0 y*0];
+
+OUTPUT: TECH8;
+

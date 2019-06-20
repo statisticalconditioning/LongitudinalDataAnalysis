@@ -1,0 +1,23 @@
+variable:    NAMES ARE y c;
+             cluster=c;
+             lagged=y(1);
+
+data: file=alist.dat; type=montecarlo;
+
+ANALYSIS: 	 TYPE IS TWOLEVEL; proc=2;
+            estimator=bayes;
+
+MODEL:
+
+MODEL:
+
+  %WITHIN%
+  y*1;
+  y on y&1*0.7;
+
+  %between%
+  y*1; [y*1];
+
+OUTPUT: TECH8;
+
+savedata:results=rs.dat;

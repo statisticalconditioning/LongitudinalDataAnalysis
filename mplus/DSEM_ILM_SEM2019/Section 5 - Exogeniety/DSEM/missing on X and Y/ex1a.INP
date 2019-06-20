@@ -1,0 +1,36 @@
+MONTECARLO:  NAMES ARE y x;
+             NOBS = 12000;
+             NREP = 100;
+             NCSIZES = 1;
+             CSIZES = 200(60);
+             lagged=y(1) x(1);
+             missing=x y;
+
+model missing: [x*-1.1 y*-1.1]; !x on y*0.5;
+
+ANALYSIS: 	estimator=bayes;  TYPE IS TWOLEVEL; proc=2;
+        
+
+MODEL MONTECARLO:
+
+  %WITHIN%
+  y*1 x*1;
+  y on y&1*0.7;
+  y on x*1;
+  x on x&1*0.7;
+
+  %between%
+  y*1 x*1; y on x*1;
+
+MODEL:
+
+  %WITHIN%
+  y*1 x*1;
+  y on y&1*0.7;
+  y on x*1;
+  x on x&1*0.7;
+
+  %between%
+  y*1 x*1; y on x*1;
+
+OUTPUT: TECH8;

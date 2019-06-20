@@ -1,0 +1,34 @@
+MONTECARLO:  NAMES ARE y;
+             NOBS = 10000;
+             NREP = 100;
+             NCSIZES = 1;
+             CSIZES = 200(50);
+             lagged=y(1);
+             repsave=all;
+             save=a*.dat;
+             results=res.dat;
+
+ANALYSIS: 	estimator=bayes;  TYPE IS TWOLEVEL; proc=2;
+        
+
+MODEL MONTECARLO:
+
+  %WITHIN%
+  y*1;
+  y on y&1*0.7;
+
+  %between%
+  y*1; 
+  [y*1]; 
+
+MODEL:
+
+  %WITHIN%
+  y*1;
+  y on y&1*0.7;
+
+  %between%
+  y*1; 
+  [y*1]; 
+
+OUTPUT: TECH8;

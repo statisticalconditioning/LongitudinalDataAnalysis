@@ -1,0 +1,33 @@
+MONTECARLO:  NAMES ARE y x;
+             NOBS = 50000;
+             NREP = 100;
+             NCSIZES = 1;
+             CSIZES = 500(100);
+             lagged=y(1);
+             within=x;
+
+ANALYSIS: 	estimator=bayes;  TYPE IS TWOLEVEL RANDOM; proc=2;
+        
+
+MODEL MONTECARLO:
+
+  %WITHIN%
+  y*1 x*1;
+  y on x*1;
+  r | y^ on y^1;
+
+  %between%
+  y*1; r*0.02; [r*0.4];
+
+MODEL:
+
+  %WITHIN%
+  y*1;
+  y on x*1;
+  r | y^ on y^1;
+
+  %between%
+  y*1; r*0.02; [r*0.4];
+
+
+OUTPUT: TECH8;
