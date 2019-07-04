@@ -2,7 +2,9 @@
 title: "Longitudinal Data Preparation"
 author: "William Murrah"
 date: "4/11/2019"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
