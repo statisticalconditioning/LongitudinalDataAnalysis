@@ -13,12 +13,12 @@ library(lme4)
 library(effects)
 library(emmeans)
 library(rstanarm)
-n <- 1000
+n <- 100
 sigma <- 5
 b0 <- 10
 btx <- -10
 bpd <- 0
-bsq <- 2
+bsq <- 0
 
 id <- rep(1:(n), each = 2)
 sq <- rep(0:1, each = n)
