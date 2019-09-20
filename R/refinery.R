@@ -8,7 +8,8 @@
 #**************************************************************************
 # packages used -----------------------------------------------------------
 library(TSstudio)  
-
+library(fda
+        )
 refine <- read.table("data/dat/refinery.dat", header = FALSE)
 names(refine) <- c("t", "u", "x")
 
@@ -23,3 +24,9 @@ ts_plot(refine)
 length(t)
 length(refine$t)
 names(refine)
+
+
+testbasis <- create.fourier.basis(rangeval = c(0, 365), nbasis = 3)
+
+plot(testbasis)
+plot(daybasis65)

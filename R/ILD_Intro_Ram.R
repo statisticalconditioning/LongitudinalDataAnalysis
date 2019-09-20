@@ -25,3 +25,4 @@ daily %>%
   summarize(max = max(day)) %>% 
   ggplot(aes(max)) + geom_histogram()
 
+

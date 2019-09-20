@@ -60,15 +60,25 @@
 #**************************************************************************
 # packages used -----------------------------------------------------------
 library(tidyverse)  
-
+library(data.table)
 hba <- haven::read_sav("../../Box Sync/6_Data/HealthBehavAcadPerfAffect/Dataset_HealthBehavAcadPerfAffect.sav")
+hba <- setDT(hba)
 
-hba <- hba %>% 
-  mutate(ID = factor(ID), 
+hba[, .(ID = factor(ID), 
          Day = factor(Day),
          Sex = factor(Sex),
-         Sem = factor(Sem))
+         Sem = factor(Sem))]
 
-ggplot(hba, aes(x = Day, SQ, group = ID)) + 
-  geom_point(size = 1) +
+library(TSstudio)
+
+hbats <- as.ts(hba)
+
+matplot(hbats[ , 7], type = "l")
+
+ts_plot(hbats)
+
+ggplot(hba, aes(x = Day, y = PhysAct, group = ID)) + 
+  geom_point(size = .3, color = "red") +
   geom_line() + facet_wrap(~ID)
+
+
