@@ -1,0 +1,15 @@
+TITLE:    Intimacy and Treatment example for diary book;
+DATA:     FILE IS time.dat;
+VARIABLE: NAMES ARE id time time01 intimacy treatment;
+          USEVAR ARE intimacy treatment time01;
+          WITHIN =  time01;
+          BETWEEN = treatment;
+          CLUSTER = id;
+ANALYSIS: TYPE = twolevel random;
+          ESTIMATOR=ml;
+MODEL:    %WITHIN% 
+          slope | intimacy on time01;         
+          %BETWEEN%
+          intimacy slope on treatment;
+          intimacy with slope;
+OUTPUT:   cinterval;
